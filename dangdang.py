@@ -39,13 +39,14 @@ regex = re.compile(
     # '<li>.*?list_num.*?(d+).</div>.*?<img src="(.*?)".*?class="name".*?title="(.*?)">.*?class="star">.*?class="tuijian">(.*?)</span>.*?class="publisher_info">.*?target="_blank">(.*?)</a>.*?class="biaosheng">.*?<span>(.*?)</span></div>.*?<p><spansclass="price_n">&yen;(.*?)</span>.*?</li>',
     '<li>\r\n  .*?<div class="list_num .*?>(\d+).*?</div>.*?<img src="(.+?)".*?title="(.+?)".*?star.*?price.*?</li>',
     re.S)
-for index in range(0, 26):
-    response = requests.get(f'http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-{index}',
-                            headers=headers)
-    if response.status_code != 200:
-        continue
-    full_text = response.text
-    all_books = re.findall(regex, full_text)
-    for book in all_books:
-        print(f'{book[0]} {book[1]} {book[2]} ')
-
+with open('books.txt', 'w', encoding='utf-8') as f:
+    for index in range(0, 26):
+        response = requests.get(f'http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-{index}',
+                                headers=headers)
+        if response.status_code != 200:
+            continue
+        full_text = response.text
+        all_books = re.findall(regex, full_text)
+        for book in all_books:
+            f.write(f'{book[0]} {book[1]} {book[2]} \n')
+f.close()
