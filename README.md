@@ -17,3 +17,8 @@ https://blog.csdn.net/QearlYu/article/details/124129605
 
 [selenium文档](https://selenium-python-zh.readthedocs.io/en/latest/)
 
+## phantomjs
+已经不支持，使用chrome的无头模式
+https://blog.csdn.net/bqw18744018044/article/details/81351137
+
+
